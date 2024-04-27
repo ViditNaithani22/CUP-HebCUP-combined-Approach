@@ -1,4 +1,5 @@
 import csv
+import os
 
 
 def calculate_ncsm(old_code, new_code):
@@ -11,17 +12,19 @@ def calculate_ncsm(old_code, new_code):
 
     return ncsm
 
-if __name__ == "__main__":
-    # Replace this path with the path to your CSV file
-    code_pairs_csv = "./Java_valid.csv"
 
-    # Read data from the CSV file
-    with open(code_pairs_csv, 'r', newline='', encoding='utf-8') as file:
+if __name__ == "__main__":
+    # Define input and output file paths
+    input_csv_path = os.path.join(os.path.dirname(__file__), '..', '..', 'Data', 'CSV-RAW-data', 'Java_valid.csv')
+    output_csv_path = os.path.join(os.path.dirname(__file__), '..', '..', 'Data', 'CSV-Labeled-data', 'labeled_java_valid.csv')
+
+    # Read data from the input CSV file
+    with open(input_csv_path, 'r', newline='', encoding='utf-8') as file:
         reader = csv.reader(file)
         rows = list(reader)
 
-    # Modify data and write back to the CSV file
-    with open(code_pairs_csv, 'w', newline='', encoding='utf-8') as file:
+    # Modify data and write back to the output CSV file
+    with open(output_csv_path, 'w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
 
         for row in rows:
@@ -34,3 +37,5 @@ if __name__ == "__main__":
             row.append(label)
             row.append(ncsm)  # Append NCSM score to the row
             writer.writerow(row)
+
+print("New labeled CSV file generated successfully!")

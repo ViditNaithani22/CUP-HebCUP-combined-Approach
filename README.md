@@ -23,3 +23,10 @@ python filtering_CUP_test.py
 python filtering_CUP_valid.py
 
 ```
+### (5) run all the python scripts in Python-Scripts/Create-HebCUP-Jasonl-data directory, to create new Jasonl files for HebCUP. 
+```
+python filtering_HebCUP_train.py
+python filtering_HebCUP_test.py
+python filtering_HebCUP_valid.py
+
+```

@@ -1,5 +1,6 @@
 import csv
 import json
+import os
 
 def read_jsonl_file(jsonl_file):
     """Reads data from a JSONL file and returns it as a list of dictionaries."""
@@ -17,9 +18,10 @@ def write_jsonl_file(data, filename):
             file.write('\n')
 
 if __name__ == "__main__":
-    # Replace this path with the path to your CSV file
-    csv_file = "Java_valid.csv"
-    jsonl_file = "valid_clean.jsonl"
+    # Define file paths
+    csv_file = os.path.join(os.path.dirname(__file__), '..', '..','Data', 'CSV-Labeled-data', 'labeled_java_valid.csv')
+    jsonl_file = os.path.join(os.path.dirname(__file__), '..', '..', 'Data', 'Jasonl-RAW-data','HebCUP_clean_dataset','HebCUP_clean_dataset','valid_clean.jsonl')
+    output_jsonl_file = os.path.join(os.path.dirname(__file__), '..', '..','Data', 'CUP-Jasonl-data', 'filtered_data_validCUP.jsonl')
 
     # Read the CSV file and identify rows labeled "CUP"
     cup_rows = []
@@ -30,19 +32,16 @@ if __name__ == "__main__":
             if row[3] == "CUP":  # Assuming the label is in the fourth column
                 cup_rows.append(int(row[2]))  # Convert ID to integer
 
-    print("IDs from CSV file:", cup_rows)
-
     # Read JSONL file and filter data based on cup_rows
     filtered_data = []
     jsonl_data = read_jsonl_file(jsonl_file)
     jsonl_ids = [item['sample_id'] for item in jsonl_data]
-    print("IDs from JSONL file:", jsonl_ids)
 
     for item in jsonl_data:
         if int(item['sample_id']) in cup_rows:  # Convert ID to integer for comparison
             filtered_data.append(item)
 
-    print("Filtered data:", filtered_data)
-
     # Write filtered data to a new JSONL file
-    write_jsonl_file(filtered_data, "filtered_data_validCUP.jsonl")
+    write_jsonl_file(filtered_data, output_jsonl_file)
+
+    print("Filtered data saved successfully to:", output_jsonl_file)

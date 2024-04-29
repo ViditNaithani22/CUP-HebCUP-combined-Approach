@@ -74,6 +74,7 @@ python filtering_HebCUP_valid.py
 
 ```
 
+The Dataset and the trained mode can be found [here](https://drive.google.com/drive/folders/1yMueleu4cEmlf8qohp2e2lS5HMo0mqEn?usp=sharing)
 
 ### References
 ```
